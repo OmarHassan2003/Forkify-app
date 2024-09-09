@@ -26,6 +26,9 @@ const controlRecipes = async function () {
 
     // 3) Rendering recipe
     recipeView.render(model.state.recipe);
+
+    // // Testing the update serving function
+    // setTimeout(controlServings, 1000);
   } catch (err) {
     console.error(err);
     recipeView.renderError();
@@ -65,8 +68,29 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+/////// This is my way of doing it
+// const controlServings = function (incOrDec) {
+//   // if incOrDec is -1 this means we will decrease the servings and else we will increase it
+
+//   // Update the recipe servings (in state)
+//   if (incOrDec < 0) model.updateServings(model.state.recipe.servings - 1);
+//   else model.updateServings(model.state.recipe.servings + 1);
+
+//   // Update the displayed recipe accordingly
+//   recipeView.render(model.state.recipe);
+// };
+
+function controlServings(newServings) {
+  // Update the recipe servings (in state)
+  model.updateServings(newServings);
+
+  // Update the displayed recipe accordingly
+  recipeView.render(model.state.recipe);
+}
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
