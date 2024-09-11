@@ -20,17 +20,26 @@ class RecipeView extends View {
 
       if (!btn) return;
 
-      console.log(btn);
       // handler();
 
       const updateTo = +btn.dataset.updateTo;
-      console.log(updateTo);
+
       if (updateTo > 0) handler(updateTo);
 
       // my way of doing it
       // if (btn.classList.contains('btn--increase-servings')) {
       //   handler(1);
       // } else handler(-1);
+    });
+  }
+
+  addHandlerAddBookmark(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--bookmark');
+
+      if (!btn) return;
+
+      handler();
     });
   }
 
@@ -86,9 +95,11 @@ class RecipeView extends View {
         
       </div>
 
-      <button class="btn--round">
+      <button class="btn--round btn--bookmark">
         <svg class="">
-          <use href="${icons}#icon-bookmark-fill"></use>
+          <use href="${icons}#icon-bookmark${
+      this._data.bookmarked ? '-fill' : ''
+    }"></use>
         </svg>
       </button>
       </div>

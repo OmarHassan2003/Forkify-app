@@ -28,7 +28,6 @@ export default class View {
 
     newElements.forEach((newEl, index) => {
       const curEl = currElements[index];
-      console.log(curEl, newEl.isEqualNode(curEl));
 
       // This is for updating the changed text only
       if (
@@ -41,7 +40,6 @@ export default class View {
 
       // This is for updating the attributes of the elements affected
       if (!newEl.isEqualNode(curEl)) {
-        console.log(Array.from(newEl.attributes));
         Array.from(newEl.attributes).forEach(att => {
           curEl.setAttribute(att.name, att.value);
         });
