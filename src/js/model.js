@@ -43,7 +43,6 @@ export const loadRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   try {
     const data = await getJSON(`${API_URL}?search=${query}`);
-    console.log(data);
 
     state.search.query = query;
 
@@ -86,6 +85,12 @@ export const addBookmark = function (recipe) {
 
   // Updating the recipe to be displayed as bookmarked
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+
+  storeBookmarks();
+};
+
+const storeBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
 export const removeBookmark = function (id) {
@@ -96,4 +101,13 @@ export const removeBookmark = function (id) {
 
   // Updating the recipe to be displayed as NOT bookmarked
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+
+  storeBookmarks();
 };
+
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+init();
+console.log(state.bookmarks);
