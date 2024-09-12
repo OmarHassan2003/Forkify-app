@@ -1,4 +1,5 @@
 import icons from 'url:../../img/icons.svg';
+import fracty from 'fracty';
 
 export default class View {
   _data;
@@ -42,7 +43,16 @@ export default class View {
         newEl.firstChild?.nodeValue.trim() !== ''
       ) {
         // console.log(newEl.firstChild.nodeValue.trim());
-        curEl.textContent = +newEl.textContent;
+        console.log(typeof newEl.textContent);
+        const str = fracty(newEl.textContent).toString();
+        let txt;
+        if (str.startsWith('"')) {
+          console.log(str);
+          txt = str.split('"')[1];
+        } else {
+          txt = str;
+        }
+        curEl.textContent = txt;
       }
 
       // This is for updating the attributes of the elements affected
