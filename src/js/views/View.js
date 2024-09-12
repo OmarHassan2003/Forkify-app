@@ -42,12 +42,9 @@ export default class View {
         !newEl.isEqualNode(curEl) &&
         newEl.firstChild?.nodeValue.trim() !== ''
       ) {
-        // console.log(newEl.firstChild.nodeValue.trim());
-        console.log(typeof newEl.textContent);
         const str = fracty(newEl.textContent).toString();
         let txt;
         if (str.startsWith('"')) {
-          console.log(str);
           txt = str.split('"')[1];
         } else {
           txt = str;

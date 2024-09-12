@@ -115,12 +115,10 @@ function controlBookmarkStart() {
 
 const controlAddRecipe = async function (newRecipe) {
   try {
-    console.log(newRecipe);
     addRecipeView.renderSpinner();
 
     // upload the new recipe data
     await model.uplaodRecipe(newRecipe);
-    console.log(model.state.recipe);
 
     // Render Recipe
     recipeView.render(model.state.recipe);

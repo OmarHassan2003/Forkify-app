@@ -145,7 +145,6 @@ const clearBookmarks = function () {
 clearBookmarks();
 
 export const uplaodRecipe = async function (data) {
-  console.log(data);
   try {
     const ingredients = Object.entries(data)
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
@@ -166,7 +165,7 @@ export const uplaodRecipe = async function (data) {
           description,
         };
       });
-    console.log(ingredients);
+
     const recipe = {
       title: data.title,
       cooking_time: +data.cookingTime,
@@ -176,8 +175,6 @@ export const uplaodRecipe = async function (data) {
       source_url: data.sourceUrl,
       ingredients,
     };
-
-    console.log(recipe);
 
     const data2 = await AJAX(`${API_URL}?key=${KEY}`, recipe);
 
